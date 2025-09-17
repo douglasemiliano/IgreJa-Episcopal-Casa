@@ -1,0 +1,45 @@
+/* Estilos gerais */
+.input-field {
+    width: 30%;
+  }
+  
+  /* Estilos para o botão de cadastro */
+  .cadastro-btn {
+    margin-left: 2rem;
+    display: inline-block; /* O botão de cadastro aparece em telas grandes */
+    text-wrap: nowrap;
+    width: 15rem;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+  }
+
+  .fab {
+   display: none;;
+  }
+  
+  /* Estilos para telas pequenas (mobile) */
+  @media (max-width: 767px) {
+
+    .input-field {
+        width: 100%;
+      }
+    /* Ocultar o botão de cadastro em telas pequenas */
+    .cadastro-btn {
+      display: none;
+    }
+  
+    /* Exibir o FAB em telas pequenas */
+    .fab {
+        display: block;
+        position: fixed;
+        bottom: 3rem;  /* Distância do fundo da tela */
+        right: 1rem;   /* Distância da lateral direita da tela */
+      }
+  
+    /* Ajustar o campo de input para 100% da largura */
+    .input-field {
+      width: 100%;
+    }
+  }
+  
+  

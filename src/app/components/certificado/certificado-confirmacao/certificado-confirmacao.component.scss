@@ -1,0 +1,51 @@
+.fab {
+    position: fixed;
+    bottom: 5.5rem;  /* Distância do fundo da tela */
+    right: 1rem;   /* Distância da lateral direita da tela */
+  }
+
+  .disabled-date {
+    pointer-events: none;  /* Impede clique nas datas */
+    color: #ccc;  /* Cor para mostrar que a data está desabilitada */
+  }
+  
+:host {
+  display: block;
+  font-family: 'Arial', sans-serif;
+}
+
+
+.empty-state {
+  padding: 2rem;
+  margin-top: 10rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  text-align: center;
+
+  & img {
+      width: 30%;
+      margin-bottom: 2rem;
+  }
+
+  & h6 {
+      font-size: 16pt;
+      font-weight: bolder;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .empty-state {
+    & img {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}
+
+}
+

@@ -1,0 +1,14 @@
+<div class="home">
+    Lecionário
+    <div class="container mt-5">
+      <mat-form-field appearance="outline" class="mr-4" style="width: 80%; ">
+        <mat-label>Data específica</mat-label>
+        <input matInput [matDatepicker]="picker1" [(ngModel)]="dataUnica" (ngModelChange)="mudouData()">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <button mat-stroked-button class="mt-4" style="background-color: purple; color: white;" (click)="goToLecionario()">
+      <mat-icon>search</mat-icon>Pesquisar
+    </button>
+  </div>

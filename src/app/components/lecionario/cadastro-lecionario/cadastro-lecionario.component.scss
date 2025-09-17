@@ -1,0 +1,79 @@
+@use '@angular/material' as mat;
+
+mat-form-field {
+    width: 100%;
+}
+
+
+// .oracoes {
+//     margin-top: 1rem;
+
+//    & .campo-oracao {
+//         display: flex;
+//         justify-content: space-between;
+//         gap: 1rem;
+//         & mat-form-field {
+//             height: 8rem;
+//             margin-bottom: 1rem;
+//         }
+    
+//         & button {
+//             background-color: purple;
+//             color: white;
+            
+//         }
+//     }
+
+//     & button {
+//         background-color: purple;
+//         color: white;
+//     }
+// }
+
+.leituras {
+
+    margin-top: 2rem;
+
+
+    & .col-md-8 {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    & .icon-button {
+        background-color: purple;
+        color: white;
+    }
+}
+
+
+.oracoes {
+  display: flex;
+  flex-direction: column;
+
+
+  & .icon-button {
+    background-color: purple;
+    color: white;
+}
+}
+
+.campo-oracao {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.campo-oracao mat-form-field {
+  flex: 1;
+}
+
+
+.add {
+    width: 200px !important;
+    max-width: 300px !important;
+    background-color: purple;
+    color: white !important;
+}
+

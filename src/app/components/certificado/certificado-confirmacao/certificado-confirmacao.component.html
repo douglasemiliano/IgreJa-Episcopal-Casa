@@ -1,0 +1,51 @@
+<div class="container my-4">
+  <h2 class="mb-4">Certificado de Confirmação</h2>
+  
+  <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="row g-3">
+    <div class="col-md-6">
+      <label for="nomeCompleto" class="form-label">Nome Completo*</label>
+      <input type="text" class="form-control" id="nomeCompleto" formControlName="nomeCompleto">
+    </div>
+    
+    <div class="col-md-6">
+      <label for="dataConfirmacao" class="form-label">Data da Confirmação*</label>
+      <input type="date" class="form-control" id="dataConfirmacao" formControlName="dataConfirmacao">
+    </div>
+
+
+    <div class="col-md-6">
+      <label for="igreja" class="form-label">Igreja da Confirmação*</label>
+      <input type="text" class="form-control" id="igreja" formControlName="igreja">
+    </div>
+    
+    <div class="col-md-6">
+      <label for="diocese" class="form-label">Diocese*</label>
+      <input type="text" class="form-control" id="diocese" formControlName="diocese">
+    </div>
+
+    
+    <div class="col-md-6">
+      <label for="bispo" class="form-label">Bispo*</label>
+      <input type="text" class="form-control" id="bispo" formControlName="bispo"
+             placeholder="Dom">
+    </div>
+
+    <div class="col-md-6">
+      <label for="numeroRegistro" class="form-label">Número de Registro</label>
+      <input type="text" class="form-control" id="numeroRegistro" formControlName="numeroRegistro">
+    </div>
+    
+    <div class="col-md-6">
+      <label for="localCelebracao" class="form-label">Local da Celebração</label>
+      <input type="text" class="form-control" id="localCelebracao" formControlName="localCelebracao">
+    </div>
+
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary" [disabled]="!formulario.valid">
+        Gerar Certificado
+      </button>
+    </div>
+  </form>
+</div>
+<img src="casa.png" alt="Logo" width="200" />

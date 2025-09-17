@@ -1,0 +1,148 @@
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+  --primary-color: #810081; // Roxo
+  --secondary-color: #5f00c0; // Roxo escuro
+  --white-color: #ffffff; // Branco
+  --black-color: #212529; // Preto
+  --success-color: darkgreen; // Verde escuro
+  --error-color: darkred; // Vermelho escuro
+}   
+
+// Definindo variáveis para as cores
+$purple: #810081;
+$dark-purple: #5f00c0;
+$white: #ffffff;
+$black: #212529;
+$success-color: darkgreen;
+$error-color: darkred;
+
+// Aplicando as variáveis nas regras
+:root {
+  @include mat.progress-spinner-overrides((
+    active-indicator-color: $purple,
+  ));
+}
+
+/* Tema Claro */
+body {
+  background-color: $white;
+  color: $black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Segoe UI', sans-serif;
+
+  & h1, & h2, & h3, & h4, & h5, & h6 {
+    color: $purple;
+  }
+
+  & .navbar {
+    background-color: rgb(237, 237, 237);
+  }
+
+  & .fixed-bottom {
+    z-index: 1;
+
+    & .btn {
+      color: $purple;
+    }
+  }
+
+  & .calendario {
+  }
+
+  & .fab {
+    background-color: $purple;
+    color: $white;
+  }
+
+  @include mat.datepicker-overrides((
+    calendar-date-selected-state-background-color: $purple,
+  ));
+}
+
+/* Tema Escuro */
+body.dark-mode {
+  background-color: $black;
+  color: $white;
+
+  & h1, & h2, & h3, & h4, & h5, & h6 {
+    color: $white;
+  }
+
+  & .navbar {
+    background-color: $dark-purple;
+    color: $white;
+  }
+
+  & .fixed-bottom {
+    z-index: 1;
+
+    & .btn {
+      color: $white;
+    }
+  }
+
+  & .calendario {
+    background-color: $black;
+  }
+
+  & .fab {
+    background-color: $dark-purple;
+    color: $white;
+  }
+
+  @include mat.datepicker-overrides((
+    calendar-date-selected-state-text-color: $white,
+    calendar-date-selected-state-background-color: $purple,
+    calendar-date-text-color: $white,
+    calendar-header-text-color: $white,
+    calendar-period-button-text-color: $white,
+    calendar-body-label-text-color: $white,
+    calendar-container-background-color: #31353a,
+  ));
+}
+
+body.dark-mode .btn-toggle-theme {
+  color: $white;
+  background-color: transparent;
+}
+
+.snackbar-success {
+  @include mat.snack-bar-overrides((
+    container-color: $success-color,
+    supporting-text-color: $white,
+  ));
+}
+
+.snackbar-error {
+  @include mat.snack-bar-overrides((
+    container-color: $error-color,
+    supporting-text-color: $white,
+  ));
+}
+
+/* Garantir que overlays (onde o calendario é renderizado) tenham fundo apropriado
+   O datepicker usa um overlay fora do componente, então estilos encapsulados
+   do componente não se aplicam. Forçamos cores para evitar fundo transparente. */
+.cdk-overlay-container,
+.cdk-overlay-pane {
+  /* garante que o painel do overlay seja opaco */
+  background-color: transparent !important; /* manter transparente no container externo */
+}
+
+/* Forçar background do mat-card que contém o calendário */
+mat-card.calendario,
+.mat-calendar,
+.mat-calendar-table {
+  background-color: $white !important;
+  color: $black !important;
+}
+
+/* Ajuste para o modo escuro: garantir contraste do calendário dentro do overlay */
+body.dark-mode mat-card.calendario,
+body.dark-mode .mat-calendar,
+body.dark-mode .mat-calendar-table {
+  background-color: #31353a !important;
+  color: $white !important;
+}

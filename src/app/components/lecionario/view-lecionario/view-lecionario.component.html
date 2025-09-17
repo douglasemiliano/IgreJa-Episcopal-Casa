@@ -1,0 +1,115 @@
+<nav class="navbar bottombar fixed-bottom d-flex flex-row">
+    <button class="btn btn" style="width: 15%;" (click)="incrementarDecrementarDia(false)"
+        (click)="getConteudoLecionario()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_back_ios_new"></mat-icon>
+
+    </button>
+    <button class="btn d-flex flex-column justify-content-center align-items-center" (click)="isOpen = !isOpen"
+        type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin" style="width: 15rem;">
+        <strong style="font-size: 14pt;">
+            {{dataUnica | date}}
+        </strong>
+
+    </button>
+    <button type="date" class="btn btn" style="width: 15%;" (click)="incrementarDecrementarDia(true)">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_forward_ios_new"></mat-icon>
+    </button>
+</nav>
+
+<ng-template style="width: 70%;" cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen">
+    <mat-card class="calendario" style="width: 15rem;">
+        <mat-calendar [selected]="dataUnica" (selectedChange)="onSelect($event)"></mat-calendar>
+    </mat-card>
+</ng-template>
+
+
+
+
+
+@if(conteudoLecionario){
+<div class="pt-4 px-2" style="margin-bottom: 5rem;">
+    <span class="mb-4 text-center mt-5">
+        <h6> {{conteudoLecionario ? conteudoLecionario.nome : "Lecionario"}} </h6>
+        <h4>
+            <strong>
+                Ano C - {{conteudoLecionario.tempo}}
+            </strong>
+        </h4>
+    </span>
+
+    <hr />
+
+    <div class="container d-flex justify-content-between flex-column">
+        <span style="text-align: justify;">
+            {{descricaoLecionario}}
+        </span>
+        <br>
+
+        <strong>
+            {{liturgiaDiariaTitulo}}
+        </strong>
+        <br>
+
+        <ol>
+            @for (lit of this.liturgiaDiaria; track lit){
+            <li>
+                {{lit}}
+            </li>
+            }
+        </ol>
+
+        <br>
+
+
+        @if (this.conteudoLecionario.leituras){
+        <strong>
+            Textos Bíblicos:
+        </strong>
+        <br>
+
+        <ul>
+            @for (texto of this.conteudoLecionario.leituras; let index = $index; track index) {
+            <li>
+                <strong>{{ primeiraLetraMaiuscula(texto.tipo) }}:</strong> {{texto.texto}}
+            </li>
+            }
+        </ul>
+
+        }
+
+        <br>
+
+
+        <strong>
+            Orações para o dia:
+        </strong>
+        <br>
+        <ul>
+            @for (oracao of this.conteudoLecionario.oracoes; let index = $index; track index) {
+            <li>
+                {{oracao}}
+            </li>
+            }
+        </ul>
+
+    </div>
+
+</div>
+} @else {
+<div class="empty-state">
+    <img src="empty.png" alt="empty-state" />
+    <h6>
+        Nenhum conteúdo encontrado para a data selecionada!
+    </h6>
+</div>
+}
+
+
+<button mat-fab class="fab" (click)="formatarTexto()">
+    <mat-icon>content_copy</mat-icon>
+</button>
+
+<!-- <button matRipple class="fab" title="Copiar" (click)="formatarTexto()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="arrow_forward_ios_new" ></mat-icon>
+    </button> -->
