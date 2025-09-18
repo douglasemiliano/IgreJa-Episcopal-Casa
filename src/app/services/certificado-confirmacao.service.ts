@@ -76,44 +76,125 @@ export class CertificadoConfirmacaoService {
     doc.setFontSize(46);
     doc.text('Certificado de Confirmação', this.larguraPagina / 2, this.margin + this.logoHeight + 45, { align: 'center' });
 
-    // Texto principal
+    // Texto principal - renderizado em blocos para permitir o nome em negrito
     doc.setFontSize(16);
-    let textosPrincipais = [];
-    
+    let currentY = this.margin + this.logoHeight + 70;
+    let confirmacaoConcatenada = false;
+
     // Dados pessoais
+    const nomeBispo = dados.bispo;
     if (dados.dataNascimento && dados.nomePais && dados.naturalidade) {
-      doc.setFont('times', 'bold');
-      const nomeCompleto = dados.nomeCompleto;
+      // Linha introdutória
       doc.setFont('times', 'roman');
-      textosPrincipais.push(
-        'Certificamos que ' + nomeCompleto + ', natural de ' + dados.naturalidade + 
-        ', nascido(a) em ' + this.formatarData(dados.dataNascimento) + 
-        ', filho(a) de ' + dados.nomePais + ','
-      );
+      doc.setFontSize(16);
+      doc.text('Certificamos que', this.larguraPagina / 2, currentY, { align: 'center' });
+      currentY += 8;
+
+      // Nome em negrito, linha separada
+      doc.setFont('times', 'bold');
+      doc.setFontSize(20);
+      doc.text(dados.nomeCompleto, this.larguraPagina / 2, currentY, { align: 'center' });
+      currentY += 12;
+
+      // Detalhes pessoais
+      doc.setFont('times', 'roman');
+      doc.setFontSize(16);
+      const detalhes = 'natural de ' + dados.naturalidade + ', nascido(a) em ' + this.formatarData(dados.dataNascimento) + ', filho(a) de ' + dados.nomePais + ',';
+      const linhasDetalhes = doc.splitTextToSize(detalhes, 250);
+      doc.text(linhasDetalhes, this.larguraPagina / 2, currentY, { align: 'center' });
+      currentY += linhasDetalhes.length * 7;
     } else {
-      const nomeCompleto =  dados.nomeCompleto;
-      textosPrincipais.push('Certificamos que ' + nomeCompleto);
+      // Preparar todos os textos
+      const intro = 'Certificamos que ';
+      const nome = dados.nomeCompleto || '';
+      const continuacao = 'recebeu o rito apostólico da Confirmação no dia ' + this.formatarData(dados.dataConfirmacao) +
+                         ', na Igreja ' + dados.igreja + ', Diocese ' + dados.diocese +
+                         ', pela imposição das mãos do Reverendo Bispo ' + nomeBispo + '.';
+      
+      // Medir larguras com suas respectivas fontes
+      doc.setFont('times', 'roman');
+      doc.setFontSize(16);
+      const widthIntro = doc.getTextWidth(intro);
+      doc.setFont('times', 'bold');
+      doc.setFontSize(20);
+      const widthNome = doc.getTextWidth(nome);
+      
+      // Tentar incluir parte do texto de continuação na primeira linha
+      doc.setFont('times', 'roman');
+      doc.setFontSize(16);
+      
+      // Dividir o texto de continuação em palavras
+      const palavrasContinuacao = continuacao.split(' ');
+      let textoPrimeiraLinha = '';
+      let textoRestante = '';
+      let widthDisponivel = this.larguraPagina - (2 * this.margin); // Largura total disponível
+      let widthUsada = widthIntro + widthNome; // Espaço já usado pelo intro e nome
+      
+      // Tentar adicionar palavras até preencher a largura disponível
+      for (let i = 0; i < palavrasContinuacao.length; i++) {
+        const palavraAtual = (i === 0 ? ' ' : ' ') + palavrasContinuacao[i];
+        const widthPalavra = doc.getTextWidth(palavraAtual);
+        
+        if (widthUsada + widthPalavra <= widthDisponivel) {
+          textoPrimeiraLinha += palavraAtual;
+          widthUsada += widthPalavra;
+        } else {
+          textoRestante = palavrasContinuacao.slice(i).join(' ');
+          break;
+        }
+      }
+      
+      // Se não couberam palavras adicionais, textoRestante recebe todo o texto
+      if (textoRestante === '' && textoPrimeiraLinha === '') {
+        textoRestante = continuacao;
+      }
+      
+      // Centralizar e desenhar primeira linha
+      const startX = (this.larguraPagina / 2) - (widthUsada / 2);
+      
+      doc.setFont('times', 'roman');
+      doc.setFontSize(16);
+      doc.text(intro, startX, currentY);
+      
+      doc.setFont('times', 'bold');
+      doc.setFontSize(20);
+      doc.text(nome, startX + widthIntro, currentY);
+      
+      if (textoPrimeiraLinha) {
+        doc.setFont('times', 'roman');
+        doc.setFontSize(16);
+        doc.text(textoPrimeiraLinha, startX + widthIntro + widthNome, currentY);
+      }
+      
+      currentY += 8;
+      
+      // Quebrar e centralizar o texto restante se houver
+      if (textoRestante) {
+        const linhasRestantes = doc.splitTextToSize(textoRestante, 250);
+        doc.setFont('times', 'roman');
+        doc.setFontSize(16);
+        doc.text(linhasRestantes, this.larguraPagina / 2, currentY, { align: 'center' });
+        currentY += linhasRestantes.length * 7;
+      }
+      
+      confirmacaoConcatenada = true;
     }
 
     // Dados do batismo
     if (dados.dataBatismo && dados.igrejaBatismo) {
-      textosPrincipais.push(
-        'batizado(a) em ' + this.formatarData(dados.dataBatismo) + 
-        ' na Igreja ' + dados.igrejaBatismo + ','
-      );
+      const batismoText = 'batizado(a) em ' + this.formatarData(dados.dataBatismo) + ' na Igreja ' + dados.igrejaBatismo + ',';
+      const linhasBat = doc.splitTextToSize(batismoText, 250);
+      doc.text(linhasBat, this.larguraPagina / 2, currentY, { align: 'center' });
+      currentY += linhasBat.length * 7;
     }
 
     // Dados da confirmação
-    const nomeBispo = dados.bispo;
-    textosPrincipais.push(
-      'recebeu o rito apostólico da Confirmação no dia ' + this.formatarData(dados.dataConfirmacao) + 
-      ', na Igreja ' + dados.igreja + ', Diocese ' + dados.diocese + 
-      ', pela imposição das mãos do Reverendo Bispo ' + nomeBispo + '.'
-    );
-
-    const textoCompleto = textosPrincipais.join(' ');
-    const linhasTexto = doc.splitTextToSize(textoCompleto, 250);
-    doc.text(linhasTexto, this.larguraPagina / 2, this.margin + this.logoHeight + 70, { align: 'center' });
+    if (!confirmacaoConcatenada) {
+      const confirmacaoText = 'recebeu o rito apostólico da Confirmação no dia ' + this.formatarData(dados.dataConfirmacao) + ', na Igreja ' + dados.igreja + ', Diocese ' + dados.diocese + ', pela imposição das mãos do Reverendo Bispo ' + nomeBispo + '.';
+      const linhasConfirm = doc.splitTextToSize(confirmacaoText, 250);
+      doc.text(linhasConfirm, this.larguraPagina / 2, currentY, { align: 'center' });
+      currentY += linhasConfirm.length * 7;
+    }
 
     // Padrinhos e Madrinhas
     if (dados.padrinhos && dados.padrinhos.length > 0) {
