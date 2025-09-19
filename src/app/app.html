@@ -10,9 +10,9 @@
     </app-navbar>
   }
 
-  <div class="app-body d-flex">
+  <div class="app-body d-flex" (click)="closeSidebar($event)">
     @if(isLoggedIn){
-      <app-sidebar (darkToggle)="toggleDarkMode()" [isExpanded]="isExpanded" [class.collapsed]="!isExpanded" [class.expanded]="isExpanded"></app-sidebar>
+      <app-sidebar (darkToggle)="toggleDarkMode()" [isExpanded]="isExpanded" [class.collapsed]="!isExpanded" [class.expanded]="isExpanded" (click)="$event.stopPropagation()"></app-sidebar>
     }
     <main class="main-content flex-grow-1">
       <router-outlet></router-outlet>

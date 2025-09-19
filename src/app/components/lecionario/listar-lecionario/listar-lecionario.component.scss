@@ -19,6 +19,15 @@
       opacity: 0.7;
     }
   }
+
+  @media (max-width: 767px) {
+    h1 {
+      margin-top: 5rem;
+    }
+    input {
+      width: 100% !important;
+    }
+  }
 }
 
 .card{

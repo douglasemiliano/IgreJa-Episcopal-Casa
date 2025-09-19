@@ -79,4 +79,11 @@ export class App implements OnInit {
       this.isExpanded = true; // expandido no desktop
     }
   }
+
+    closeSidebar(event: Event) {
+    // Fecha o sidebar se ele estiver aberto e o clique não for nele
+    if (this.isExpanded) {
+      this.isExpanded = false;
+    }
+  }
 }
