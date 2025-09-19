@@ -3,9 +3,27 @@
     top: 0;
     width: 100%;
     z-index: 1000;
+    background-color: var(--card-background);
   }
   
   .spacer {
     flex: 1 1 auto;
   }
-  
+
+  button {
+    background: var(--card-background) !important;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color) !important;
+    font-size: 1.5rem;
+  }
+
+  .expanded{
+    margin-left: 18rem;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+  }
+
+  .collapsed{
+    margin-left: 0.5rem;
+    transition: margin-left 0.3s ease, width 0.3s ease;
+  }

@@ -1,148 +1,202 @@
 @use '@angular/material' as mat;
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+/* 1️⃣ Importa a fonte Manrope com todos os pesos */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* 2️⃣ Variáveis CSS para cores e design tokens */
 :root {
-  --primary-color: #810081; // Roxo
-  --secondary-color: #5f00c0; // Roxo escuro
-  --white-color: #ffffff; // Branco
-  --black-color: #212529; // Preto
-  --success-color: darkgreen; // Verde escuro
-  --error-color: darkred; // Vermelho escuro
-}   
+  --color-primary: #6a1b9a; /* purple */
+  --color-primary-contrast: #ffffff;
+  --background-color: #f4f7fb;
+  --text-color: #29343d;
+  --card-background: #ffffff;
+  --active-background: rgba(99,91,255,1);
 
-// Definindo variáveis para as cores
-$purple: #810081;
-$dark-purple: #5f00c0;
-$white: #ffffff;
-$black: #212529;
-$success-color: darkgreen;
-$error-color: darkred;
+  /* Font family */
+  --font-family-base: "Montserrat", sans-serif;
 
-// Aplicando as variáveis nas regras
-:root {
-  @include mat.progress-spinner-overrides((
-    active-indicator-color: $purple,
-  ));
+  /* Font weights */
+  --font-thin: 200;
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-extra-bold: 800;
+
+    /* Tamanhos de fonte */
+  --font-size-h1: 2.5rem;
+  --font-size-h2: 2rem;
+  --font-size-h3: 1.75rem;
+  --font-size-h4: 1.5rem;
+  --font-size-h5: 1.25rem;
+  --font-size-h6: 1rem;
+  --font-size-body: 1rem;
+  --font-size-small: 0.875rem;
+
+    /* Espaçamentos */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
 }
 
-/* Tema Claro */
-body {
-  background-color: $white;
-  color: $black;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-family: 'Segoe UI', sans-serif;
-
-  & h1, & h2, & h3, & h4, & h5, & h6 {
-    color: $purple;
-  }
-
-  & .navbar {
-    background-color: rgb(237, 237, 237);
-  }
-
-  & .fixed-bottom {
-    z-index: 1;
-
-    & .btn {
-      color: $purple;
-    }
-  }
-
-  & .calendario {
-  }
-
-  & .fab {
-    background-color: $purple;
-    color: $white;
-  }
-
-  @include mat.datepicker-overrides((
-    calendar-date-selected-state-background-color: $purple,
-  ));
-}
-
-/* Tema Escuro */
+/* Tema escuro */
 body.dark-mode {
-  background-color: $black;
-  color: $white;
+  --color-primary: #9c27b0;
+  --color-primary-contrast: #ffffff;
+  --background-color: #1f2a3d;
+  --text-color: #f5f5f5;
+  --card-background: #1a2537;
+  --active-background: rgba(99,91,255,1);
 
-  & h1, & h2, & h3, & h4, & h5, & h6 {
-    color: $white;
-  }
+  @include mat.table-overrides((
+    background-color: orange,
+    header-headline-color: var(--text-color),
+    row-item-label-text-color: var(--text-color),
+    row-item-outline-color: var(--text-color)
+  ));
 
-  & .navbar {
-    background-color: $dark-purple;
-    color: $white;
-  }
+    @include mat.sort-overrides((
+    arrow-color: var(--text-color),
+  ));
 
-  & .fixed-bottom {
-    z-index: 1;
-
-    & .btn {
-      color: $white;
-    }
-  }
-
-  & .calendario {
-    background-color: $black;
-  }
-
-  & .fab {
-    background-color: $dark-purple;
-    color: $white;
-  }
-
-  @include mat.datepicker-overrides((
-    calendar-date-selected-state-text-color: $white,
-    calendar-date-selected-state-background-color: $purple,
-    calendar-date-text-color: $white,
-    calendar-header-text-color: $white,
-    calendar-period-button-text-color: $white,
-    calendar-body-label-text-color: $white,
-    calendar-container-background-color: #31353a,
+    @include mat.select-overrides((
+    enabled-trigger-text-color: var(--text-color),
   ));
 }
 
-body.dark-mode .btn-toggle-theme {
-  color: $white;
-  background-color: transparent;
+/* 3️⃣ Reset e aplicação global da fonte */
+html, body {
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: var(--font-family-base) !important;
+  font-weight: var(--font-regular) !important;
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  line-height: 1.5 !important;
+  transition: background-color 0.32s ease, color 0.32s ease !important;
 }
 
-.snackbar-success {
-  @include mat.snack-bar-overrides((
-    container-color: $success-color,
-    supporting-text-color: $white,
-  ));
+/* 4️⃣ Botões e cores principais */
+
+
+/* 5️⃣ Tipografia global */
+h1 { font-size: var(--font-size-h1); font-weight: var(--font-extra-bold); margin-bottom: var(--spacing-md); }
+h2 { font-size: var(--font-size-h2); font-weight: var(--font-semibold); margin-bottom: var(--spacing-md); }
+h3 { font-size: var(--font-size-h3); font-weight: var(--font-medium); margin-bottom: var(--spacing-sm); }
+h4 { font-size: var(--font-size-h4); font-weight: var(--font-regular); margin-bottom: var(--spacing-sm); }
+h5 { font-size: var(--font-size-h5); font-weight: var(--font-regular); margin-bottom: var(--spacing-xs); }
+h6 { font-size: var(--font-size-h6); font-weight: var(--font-medium); margin-bottom: var(--spacing-xs); }
+p, span, li, a, button { font-size: var(--font-size-body); }
+
+/* 5️⃣ Classes utilitárias para peso da fonte */
+.text-thin { font-weight: var(--font-thin); }
+.text-light { font-weight: var(--font-light); }
+.text-regular { font-weight: var(--font-regular); }
+.text-medium { font-weight: var(--font-medium); }
+.text-semibold { font-weight: var(--font-semibold); }
+.text-bold { font-weight: var(--font-bold); }
+.text-extra-bold { font-weight: var(--font-extra-bold); }
+
+
+button:disabled, .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.snackbar-error {
-  @include mat.snack-bar-overrides((
-    container-color: $error-color,
-    supporting-text-color: $white,
-  ));
+
+/* Margens */
+.m-xs { margin: var(--spacing-xs); }
+.m-sm { margin: var(--spacing-sm); }
+.m-md { margin: var(--spacing-md); }
+.m-lg { margin: var(--spacing-lg); }
+.m-xl { margin: var(--spacing-xl); }
+
+.mt-xs { margin-top: var(--spacing-xs); }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+
+.mb-xs { margin-bottom: var(--spacing-xs); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+
+.ml-xs { margin-left: var(--spacing-xs); }
+.ml-sm { margin-left: var(--spacing-sm); }
+.ml-md { margin-left: var(--spacing-md); }
+.ml-lg { margin-left: var(--spacing-lg); }
+.ml-xl { margin-left: var(--spacing-xl); }
+
+.mr-xs { margin-right: var(--spacing-xs); }
+.mr-sm { margin-right: var(--spacing-sm); }
+.mr-md { margin-right: var(--spacing-md); }
+.mr-lg { margin-right: var(--spacing-lg); }
+.mr-xl { margin-right: var(--spacing-xl); }
+
+/* Paddings */
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+
+.pt-xs { padding-top: var(--spacing-xs); }
+.pt-sm { padding-top: var(--spacing-sm); }
+.pt-md { padding-top: var(--spacing-md); }
+.pt-lg { padding-top: var(--spacing-lg); }
+.pt-xl { padding-top: var(--spacing-xl); }
+
+.pb-xs { padding-bottom: var(--spacing-xs); }
+.pb-sm { padding-bottom: var(--spacing-sm); }
+.pb-md { padding-bottom: var(--spacing-md); }
+.pb-lg { padding-bottom: var(--spacing-lg); }
+.pb-xl { padding-bottom: var(--spacing-xl); }
+
+.pl-xs { padding-left: var(--spacing-xs); }
+.pl-sm { padding-left: var(--spacing-sm); }
+.pl-md { padding-left: var(--spacing-md); }
+.pl-lg { padding-left: var(--spacing-lg); }
+.pl-xl { padding-left: var(--spacing-xl); }
+
+.pr-xs { padding-right: var(--spacing-xs); }
+.pr-sm { padding-right: var(--spacing-sm); }
+.pr-md { padding-right: var(--spacing-md); }
+.pr-lg { padding-right: var(--spacing-lg); }
+.pr-xl { padding-right: var(--spacing-xl); }
+
+
+.table-responsive table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card-background);
+
+  th.mat-header-cell {
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
+    font-weight: var(--font-semibold) !important;
+  }
+
+  td.mat-cell {
+    color: var(--text-color) !important;
+    background-color: var(--card-background) !important;
+  }
+
+  tr.mat-row:hover {
+    background-color: var(--active-background) !important;
+  }
 }
 
-/* Garantir que overlays (onde o calendario é renderizado) tenham fundo apropriado
-   O datepicker usa um overlay fora do componente, então estilos encapsulados
-   do componente não se aplicam. Forçamos cores para evitar fundo transparente. */
-.cdk-overlay-container,
-.cdk-overlay-pane {
-  /* garante que o painel do overlay seja opaco */
-  background-color: transparent !important; /* manter transparente no container externo */
-}
+mat-paginator {
+  background-color: var(--card-background) !important;
+  color: var(--text-color) !important;
 
-/* Forçar background do mat-card que contém o calendário */
-mat-card.calendario,
-.mat-calendar,
-.mat-calendar-table {
-  background-color: $white !important;
-  color: $black !important;
-}
-
-/* Ajuste para o modo escuro: garantir contraste do calendário dentro do overlay */
-body.dark-mode mat-card.calendario,
-body.dark-mode .mat-calendar,
-body.dark-mode .mat-calendar-table {
-  background-color: #31353a !important;
-  color: $white !important;
+  .mat-paginator-range-label,
+  .mat-icon-button {
+    color: var(--text-color) !important;
+  }
 }

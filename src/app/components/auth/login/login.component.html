@@ -1,25 +1,44 @@
-<div class="login-container">
+<!-- <div class="login-container">
   <h2>Login</h2>
 
   <form [formGroup]="loginForm">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" type="email" required />
-    </mat-form-field>
+    <input class="form-control" formControlName="email" type="email" required />
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Senha</mat-label>
-      <input matInput formControlName="password" type="password" required />
-    </mat-form-field>
+    <input class="form-control" formControlName="password" type="password" required />
 
   </form>
-  <button mat-stroked-button color="primary" (click)="onSubmit()" type="submit">
+  <button class="btn" (click)="onSubmit()" type="submit">
     Entrar
   </button>
 </div>
 
 <div class="container d-flex justify-content-center">
-  <button mat-stroked-button routerLink="/home">
+  <button class="btn" routerLink="/home">
     <mat-icon>home</mat-icon>Início</button>
 </div>
-
+ -->
+<div class="login-container text-center">
+  <main class="form-signin">
+    <form [formGroup]="loginForm">
+      <img class="mb-4" src="casa.png" alt="" width="75" height="65">
+      <h1 class="h3 mb-3 fw-normal">Login</h1>
+  
+      <div class="form-floating">
+        <input type="email" class="form-control" formControlName="email" id="floatingInput" placeholder="name@exemplo.com">
+        <label for="floatingInput">Email</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" formControlName="password" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Senha</label>
+      </div>
+  
+      <!-- <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Lembrar de mim
+        </label>
+      </div> -->
+      <button class="mt-3 w-100 btn btn-lg btn-primary" type="submit" (click)="onSubmit()">Entrar</button>
+      <p class="mt-4 mb-4">&copy; 2025</p>
+    </form>
+  </main> 
+</div>

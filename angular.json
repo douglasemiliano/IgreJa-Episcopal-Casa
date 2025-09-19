@@ -35,6 +35,7 @@
               }
             ],
             "styles": [
+              "node_modules/ngx-simple-datatable/src/ngx-simple-datatable.css",
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"

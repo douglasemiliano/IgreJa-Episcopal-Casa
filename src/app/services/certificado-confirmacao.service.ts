@@ -33,8 +33,7 @@ export class CertificadoConfirmacaoService {
     return canvas.toDataURL('image/png');
   }
 
-  async gerarCertificado(dados: DadosCertificado): Promise<void> {
-    
+  async gerarCertificado(dados: DadosCertificado): Promise<Blob> {
     const doc = new jsPDF({
       orientation: 'landscape',
       unit: 'mm',
@@ -222,10 +221,11 @@ export class CertificadoConfirmacaoService {
     doc.text('Pároco', 85, this.alturaPagina - 30, { align: 'center' });
     doc.text('Bispo Diocesano', 215, this.alturaPagina - 30, { align: 'center' });
 
-    // Download do arquivo
-    const nomeArquivo = 'certificado-confirmacao-' + 
-                       dados.nomeCompleto.toLowerCase().replace(/\s+/g, '-') + '.pdf';
-    doc.save(nomeArquivo);
+    return doc.output('blob');
+  }
+
+  getNomeArquivo(nomeCompleto: string): string {
+    return 'certificado-confirmacao-' + nomeCompleto.toLowerCase().replace(/\s+/g, '-') + '.pdf';
   }
 
   private formatarData(data: Date): string {

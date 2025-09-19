@@ -1,0 +1,49 @@
+<div class="sidebar"  [class.collapsed]="!isExpanded" [class.expanded]="isExpanded">
+  <a class="sidebar-brand" (click)="toggleSidebar()">
+    <img src="casa.png" alt="" width="65" height="60">
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li>
+      <a class="nav-link m-sm" routerLink="/home" routerLinkActive="active">
+        <mat-icon>home</mat-icon>
+        Home
+      </a>
+    </li>
+    <li>
+      <a class="nav-link m-sm">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a class="nav-link m-sm">
+        <mat-icon>shopping_cart</mat-icon>
+        Orders
+      </a>
+    </li>
+    <li>
+      <a class="nav-link m-sm"  routerLink="/certificado/confirmacao" routerLinkActive="active">
+        <mat-icon>inventory_2</mat-icon>
+        Certificados
+      </a>
+    </li>
+    <li>
+      <a class="nav-link m-sm" routerLink="/lecionario/listar" routerLinkActive="active">
+        <mat-icon>group</mat-icon>
+        Lecionários
+      </a>
+    </li>
+  </ul>
+  <hr>
+  <div class="dropdown">
+    <button (click)="onToggle()">
+        <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
+    </button>
+    <a class="dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+      <img src="https://github.com/mdo.png" alt="" width="32" height="32">
+      <strong>mdo</strong>
+    </a>
+  </div>
+
+</div>

@@ -2,27 +2,31 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DadosCertificado } from '../../../model/certificado.model';
 import { CertificadoConfirmacaoService } from '../../../services/certificado-confirmacao.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { PdfViewerModalComponent } from './pdf-viewer-modal/pdf-viewer-modal.component';
 
 @Component({
   selector: 'app-certificado-confirmacao',
-  imports: [ReactiveFormsModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, MatDialogModule],
   templateUrl: './certificado-confirmacao.component.html',
   styleUrl: './certificado-confirmacao.component.scss'
 })
 export class CertificadoConfirmacaoComponent {
 formulario: FormGroup;
-
+  src:any;
   constructor(
     private fb: FormBuilder,
-    private certificadoService: CertificadoConfirmacaoService
+    private certificadoService: CertificadoConfirmacaoService,
+    private dialog: MatDialog
   ) {
     this.formulario = this.fb.group({
-      nomeCompleto: ['', Validators.required],
-      dataConfirmacao: ['', Validators.required],
-      igreja: ['', Validators.required],
-      diocese: ['', Validators.required],
+      nomeCompleto: ['Douglas', Validators.required],
+      dataConfirmacao: ['11/08/1999', Validators.required],
+      igreja: ['Casa', Validators.required],
+      diocese: ['Unida', Validators.required],
       paroco: [''],
-      bispo: ['', Validators.required],
+      bispo: ['Hermany', Validators.required],
       numeroRegistro: [''],
       padrinhos: [''],
       localCelebracao: ['Rua Arão Lins de Andrade, 106, Jaboatão dos Guararapes 54310-335, PE'],
@@ -50,7 +54,16 @@ formulario: FormGroup;
       };
       
       try {
-        await this.certificadoService.gerarCertificado(dados);
+        const pdfBlob = await this.certificadoService.gerarCertificado(dados);
+        const fileName = this.certificadoService.getNomeArquivo(dados.nomeCompleto);
+        
+        this.dialog.open(PdfViewerModalComponent, {
+          width: '80vw',
+          data: {
+            pdfBlob,
+            fileName
+          }
+        });
       } catch (error) {
         console.error('Erro ao gerar certificado:', error);
         alert('Erro ao gerar o certificado. Por favor, tente novamente.');

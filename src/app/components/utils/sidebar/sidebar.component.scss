@@ -1,0 +1,132 @@
+.sidebar {
+  width: 15vw;
+  height: 100vh;
+  padding: 1rem;
+  background-color: var(--card-background); // bg-light equivalente do Bootstrap
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+
+
+
+  a.sidebar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: var(--text-color); // link-dark
+    text-decoration: none;
+
+    .mat-icon {
+      margin-right: 0.5rem;
+    }
+
+    span {
+      font-size: 1.25rem; // fs-4
+    }
+  }
+
+  hr {
+    margin: 1rem 0;
+  }
+
+  ul.nav {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: auto;
+    font-weight: var(--font-light);
+
+    li {
+      .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 11px 16px !important;
+        color: var(--text-color); // link-dark
+        text-decoration: none;
+        border-radius: 12px;
+        font-size: 14px;
+        
+        &.active {
+          box-shadow: 0 17px 20px -8px #4d5bec3b;
+          background-color: var(--active-background); // primary
+          color: white; // link-dark
+        }
+
+        .mat-icon {
+          margin-right: 0.5rem;
+        }
+
+        &:hover {
+          text-decoration: none;
+          // background-color: rgba(0, 0, 0, 0.05);
+          // color: var(--text-color);
+        }
+      }
+    }
+  }
+
+  .dropdown {
+    a.dropdown-toggle {
+      display: flex;
+      align-items: center;
+      color: var(--text-color); // link-dark
+      text-decoration: none;
+
+      img {
+        border-radius: 50%;
+        margin-right: 0.5rem;
+      }
+
+      strong {
+        font-weight: bold;
+      }
+    }
+
+    .dropdown-menu {
+      font-size: 0.875rem;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+      .dropdown-item {
+        padding: 0.25rem 1.5rem;
+        color: var(--text-color);
+
+        &:hover {
+          background-color: var(--active-background);
+        }
+      }
+
+      .dropdown-divider {
+        margin: 0.5rem 0;
+        border-top: 1px solid var(--text-color);
+      }
+    }
+  }
+}
+
+/* Keyframes */
+@keyframes collapseSidebar {
+  from {
+    width: 280px;
+  }
+  to {
+    width: 80px;
+  }
+}
+
+@keyframes expandSidebar {
+  from {
+    width: 80px;
+  }
+  to {
+    width: 280px;
+  }
+}
+
+
+  button {
+    background: var(--card-background) !important;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color) !important;
+    font-size: 1.5rem;
+  }
