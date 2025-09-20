@@ -23,7 +23,7 @@
         <td>{{ membro.telefone }}</td>
         <td>{{ membro.funcao }}</td>
         <td class="text-center">
-        @if((confirmacoes[membro.id]?.length ?? 0) > 0) {
+        @if(membro.confirmacao.length > 0) {
             <span class="badge bg-success">Sim</span>
         } @else {
             <span class="badge bg-secondary">Não</span>
@@ -33,7 +33,7 @@
             <button 
             class="btn btn-sm btn-primary" 
             (click)="confirmarMembro(membro)"
-            [disabled]="(confirmacoes[membro.id]?.length ?? 0) > 0"
+            [disabled]="membro.confirmacao.length > 0"
             title="Confirmar Membro">
             <mat-icon>done</mat-icon>
             </button>

@@ -23,7 +23,7 @@ export class ListarMembrosComponent implements OnInit {
 
   async carregarMembros() {
     try {
-      const { data, error } = await this.supabaseService.getMembros();
+      const { data, error } = await this.supabaseService.getMembrosComConfirmacao();
       if (error) throw error;
       this.membros = data || [];
 
@@ -44,7 +44,7 @@ export class ListarMembrosComponent implements OnInit {
   async confirmarMembro(membro: any) {
     const dadosConfirmacao = {
       data_confirmacao: new Date(),
-      oficiante: 'Pastor Fulano', // você pode deixar para preencher dinamicamente
+      oficiante: 'Hermany Soares', // você pode deixar para preencher dinamicamente
       observacoes: ''
     };
 
