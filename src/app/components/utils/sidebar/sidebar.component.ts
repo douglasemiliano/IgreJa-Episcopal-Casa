@@ -1,8 +1,9 @@
-import { Component, AfterViewInit, OnDestroy, ElementRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ElementRef, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Tooltip } from 'bootstrap';
 import { MatIcon } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { CoreService } from '../../../services/core.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,10 +16,21 @@ export class SidebarComponent implements AfterViewInit, OnDestroy {
   @Input() isExpanded = true;
   @Input() isDarkMode = false;
   @Output() darkToggle = new EventEmitter<void>();
-  
+  @Output() sidenavToggle = new EventEmitter<void>();
+
   private tooltips: Tooltip[] = [];
 
-  constructor(private el: ElementRef) {}
+  private coreService: CoreService = inject(CoreService);
+  isMobile: boolean
+
+  constructor(private el: ElementRef) {
+    this.coreService.isMobile$.subscribe({
+      next: (data) => {
+        this.isMobile = data;
+        console.log('isMobile no sidebar:', data);
+      }
+    })
+  }
 
   ngAfterViewInit(): void {
     this.initializeTooltips();
@@ -28,25 +40,11 @@ export class SidebarComponent implements AfterViewInit, OnDestroy {
     this.disposeTooltips();
   }
 
-  // toggleSidebar(): void {
-  //   this.isExpanded = !this.isExpanded;
-  //   setTimeout(() => this.initializeTooltips());
-  // }
-
 
   toggleSidebar(): void {
   this.isExpanded = !this.isExpanded;
-  const sidebarEl = this.el.nativeElement.querySelector('app-sidebar');
-
-  if (this.isExpanded) {
-    sidebarEl.classList.add('expanded');
-    sidebarEl.classList.remove('collapsed');
-  } else {
-    sidebarEl.classList.add('collapsed');
-    sidebarEl.classList.remove('expanded');
-  }
+  this.sidenavToggle.emit();
 }
-
 
   private initializeTooltips(): void {
     this.disposeTooltips();

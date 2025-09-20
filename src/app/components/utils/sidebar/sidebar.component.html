@@ -1,4 +1,14 @@
-<div class="sidebar"  [class.collapsed]="!isExpanded" [class.expanded]="isExpanded">
+<div class="sidebar">
+  
+  <!-- botão X no topo -->
+  <div class="sidebar-header">
+    @if(isExpanded && isMobile){
+      <button class="close-btn" (click)="toggleSidebar()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </div>
+
   <a class="sidebar-brand" (click)="toggleSidebar()">
     <img src="casa.png" alt="" width="65" height="60">
   </a>
@@ -23,7 +33,7 @@
       </a>
     </li>
     <li>
-      <a class="nav-link m-sm"  routerLink="/certificado/confirmacao" routerLinkActive="active">
+      <a class="nav-link m-sm" routerLink="/certificado/confirmacao" routerLinkActive="active">
         <mat-icon>inventory_2</mat-icon>
         Certificados
       </a>
@@ -38,12 +48,11 @@
   <hr>
   <div class="dropdown">
     <button (click)="onToggle()">
-        <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
+      <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
     </button>
     <a class="dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
       <img src="https://github.com/mdo.png" alt="" width="32" height="32">
       <strong>mdo</strong>
     </a>
   </div>
-
 </div>

@@ -21,7 +21,7 @@ export class NavbarComponent {
   @Output() sidenavToggle = new EventEmitter<void>();
 
   isExpanded: boolean = true;
-  constructor(private router: Router, private supabase: SupabaseService, private lecionarioService: LecionarioService) {}
+  constructor(private router: Router, private supabase: SupabaseService, private lecionarioService: LecionarioService) { }
 
   onToggle() { this.darkToggle.emit(); }
   async logout() {
@@ -29,13 +29,13 @@ export class NavbarComponent {
     this.router.navigate(['/login']);
   }
 
-  goToCadastro(){
+  goToCadastro() {
     this.lecionarioService.setLecionarioSelecionado(null);
     this.router.navigateByUrl('/cadastro');
   }
 
-  onSidenavToggle() { 
+  onSidenavToggle() {
     this.isExpanded = !this.isExpanded;
-    this.sidenavToggle.emit(); }
-
+    this.sidenavToggle.emit();
+  }
 }

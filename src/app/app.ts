@@ -67,7 +67,7 @@ export class App implements OnInit {
     this.isExpanded = !this.isExpanded;
   }
 
-    @HostListener('window:resize')
+  @HostListener('window:resize')
   onResize() {
     this.checkScreenSize();
   }
@@ -82,8 +82,11 @@ export class App implements OnInit {
 
     closeSidebar(event: Event) {
     // Fecha o sidebar se ele estiver aberto e o clique não for nele
-    if (this.isExpanded) {
-      this.isExpanded = false;
+    if  (window.innerWidth <= 768) {
+      if (this.isExpanded) {
+        this.isExpanded = false;
+      }
     }
+
   }
 }

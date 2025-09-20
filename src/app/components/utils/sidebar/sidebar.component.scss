@@ -1,18 +1,18 @@
 .sidebar {
-  width: 15vw;
+  width: 280px;
   height: 100vh;
   padding: 1rem;
   background-color: var(--card-background);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  overflow-y: auto; // 🔹 permite rolagem vertical se o conteúdo ultrapassar a tela
+  overflow-y: auto;
+  transition: width 0.3s ease; /* suaviza expansão/retração */
 
-  // Melhor experiência em telas pequenas
+  /* Melhor experiência em telas pequenas */
   @media (max-width: 768px) {
-    width: 70vw;     // ocupa mais espaço em telas pequenas
-    min-width: 220px; // garante largura mínima
-    max-width: 300px; // não fica exagerado
+    width: 100%;
+    max-width: 280px;
   }
 
   a.sidebar-brand {
@@ -46,16 +46,17 @@
       .nav-link {
         display: flex;
         align-items: center;
-        padding: 11px 16px !important;
+        padding: 0.75rem 1rem;
         color: var(--text-color);
         text-decoration: none;
         border-radius: 12px;
         font-size: 14px;
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 
         &.active {
-          box-shadow: 0 17px 20px -8px #4d5bec3b;
+          box-shadow: 0 4px 10px rgba(77, 91, 236, 0.25);
           background-color: var(--active-background);
-          color: white;
+          color: #fff;
         }
 
         .mat-icon {
@@ -63,6 +64,8 @@
         }
 
         &:hover {
+          background-color: var(--active-background);
+          color: #fff;
           text-decoration: none;
         }
       }
@@ -96,6 +99,7 @@
 
         &:hover {
           background-color: var(--active-background);
+          color: #fff;
         }
       }
 
@@ -107,30 +111,49 @@
   }
 }
 
-/* Keyframes */
-@keyframes collapseSidebar {
-  from {
-    width: 280px;
-  }
-  to {
-    width: 80px;
-  }
+/* Estados da sidebar */
+.sidebar.collapsed {
+  width: 80px;
 }
 
-@keyframes expandSidebar {
-  from {
-    width: 80px;
-  }
-  to {
-    width: 280px;
-  }
+.sidebar.expanded {
+  width: 280px;
 }
 
-/* Botão toggle */
-button {
-  background: var(--card-background) !important;
+/* Cabeçalho da sidebar (onde vai o botão X) */
+.sidebar-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+
+/* Botão fechar (X) */
+.close-btn {
+  background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--text-color) !important;
+  color: var(--text-color);
+  font-size: 1.8rem;
+  border-radius: 50%;
+  padding: 0.25rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: var(--active-background);
+  color: #fff;
+}
+
+/* Botões dentro do sidebar (ex: toggle dark mode) */
+.sidebar button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
   font-size: 1.5rem;
+  transition: color 0.2s ease;
+}
+
+.sidebar button:hover {
+  color: #fff;
 }
