@@ -12,13 +12,14 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { Router } from "@angular/router";
 import { LecionarioService } from "../../services/lecionario.service";
+import { DashboardComponent } from "../dashboard/dashboard.component";
 
 @Component({
   selector: 'app-home',
   imports: [FormsModule,
     CommonModule, MatButtonModule,
     MatIconModule, MatRippleModule, MatCardModule, ReactiveFormsModule, MatDatepickerModule, MatFormFieldModule,
-    MatInputModule, OverlayModule],
+    MatInputModule, OverlayModule, DashboardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

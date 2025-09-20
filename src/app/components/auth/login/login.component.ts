@@ -44,4 +44,14 @@ export class LoginComponent {
       }
     }
   }
+
+  async loginGoogle() {
+  const { data, error } = await this.supabase.signInWithGoogle();
+  if (error) {
+    console.error('Erro ao logar com Google:', error);
+  } else {
+    console.log('Redirecionando...', data);
+  }
+}
+
 }

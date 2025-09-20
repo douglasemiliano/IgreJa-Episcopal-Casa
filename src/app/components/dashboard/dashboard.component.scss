@@ -1,0 +1,25 @@
+.container {
+  max-width: 900px;
+}
+
+.card {
+  border-radius: 1rem;
+  background-color: var(--card-background);
+  border: none;
+
+
+  & .card-header {
+    background-color: var(--card-background);
+    font-weight: var(--font-medium);
+    font-size: var(--font-size-h4);
+    color: var(--text-color);
+    // margin-left: -2rem;
+    // margin-top: -2rem;
+    // margin-bottom: 1rem;
+    border: none;
+  }
+
+  & mat-icon {
+    color: var(--text-color)
+  }
+}

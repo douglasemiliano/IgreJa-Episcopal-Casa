@@ -72,43 +72,6 @@
     }
   }
 
-  .dropdown {
-    a.dropdown-toggle {
-      display: flex;
-      align-items: center;
-      color: var(--text-color);
-      text-decoration: none;
-
-      img {
-        border-radius: 50%;
-        margin-right: 0.5rem;
-      }
-
-      strong {
-        font-weight: bold;
-      }
-    }
-
-    .dropdown-menu {
-      font-size: 0.875rem;
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-
-      .dropdown-item {
-        padding: 0.25rem 1.5rem;
-        color: var(--text-color);
-
-        &:hover {
-          background-color: var(--active-background);
-          color: #fff;
-        }
-      }
-
-      .dropdown-divider {
-        margin: 0.5rem 0;
-        border-top: 1px solid var(--text-color);
-      }
-    }
-  }
 }
 
 /* Estados da sidebar */
@@ -156,4 +119,10 @@
 
 .sidebar button:hover {
   color: #fff;
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }

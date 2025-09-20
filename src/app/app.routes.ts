@@ -13,4 +13,5 @@ export const routes: Routes = [
     { path: 'certificado/confirmacao', loadComponent: () => import('./components/certificado/certificado-confirmacao/certificado-confirmacao.component').then(c => c.CertificadoConfirmacaoComponent) },
     { path: 'membros/cadastrar', loadComponent: () => import('./components/membros/cadastrar-membro/cadastrar-membro.component').then(c => c.CadastrarMembroComponent), canActivate: [AuthGuard] },
     { path: 'membros', loadComponent: () => import('./components/membros/listar-membro/listar-membro.component').then(c => c.ListarMembrosComponent), canActivate: [AuthGuard] },
+    { path: 'dashboard', loadComponent: () => import('./components/dashboard/dashboard.component').then(c => c.DashboardComponent), canActivate: [AuthGuard] },
 ];

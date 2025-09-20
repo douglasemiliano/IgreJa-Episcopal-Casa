@@ -1,4 +1,5 @@
 export const environment = {
-    SUPABASE_URL: 'undefined',
-    SUPABASE_KEY: 'undefined',
+  SUPABASE_URL: '',
+  SUPABASE_KEY: '',
+  REDIRECT_URL: 'http://localhost:4200/'
 };

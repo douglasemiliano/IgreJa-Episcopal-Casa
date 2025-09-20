@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,8 +14,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withFetch()),
     provideNativeDateAdapter(),
+    provideCharts(withDefaultRegisterables()),
     { provide: LOCALE_ID, useValue: 'pt-BR' }, // Locale configurado para Brasil
     { provide: 'DEFAULT_TIMEZONE', useValue: 'America/Recife' }, // Fuso horário padrão
-    DatePipe
+    DatePipe, provideCharts(withDefaultRegisterables())
   ]
 };

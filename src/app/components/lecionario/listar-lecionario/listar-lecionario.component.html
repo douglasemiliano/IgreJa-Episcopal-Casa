@@ -1,7 +1,7 @@
-<div class="container">
-
-  <h1>Lecionários</h1>
-
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Lecionários</h2>
+  </div>
   <div class="card px-5 py-4 mb-3">
     <div class="d-flex justify-content-between align-items-center">
       <input type="text" class="form-control w-25" placeholder="Pesquisar..." (keyup)="applyFilter($event)" placeholder="Páscoa" #input>
@@ -51,7 +51,7 @@
   
     <mat-paginator #paginator
                  (page)="handlePageEvent($event)"
-                 [length]="dataSourceLecionario?.data!.length"
+                 [length]="dataSourceLecionario.data!.length"
                  [pageSize]="pageSize"
                  [pageSizeOptions]="[5, 10, 25, 100]"
                  aria-label="Select page">

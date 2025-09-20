@@ -63,9 +63,8 @@ export class SupabaseService {
     return date.toLocaleDateString("pt-BR").split('/').reverse().join('-');
   }
 
-  async getTodos() {
-    const { data: lecionario, error } = await this.supabase.from('lecionario').select('*');
-    return { lecionario, error };
+  async getTodosLectionary() {
+    return this.supabase.from('lecionario').select('*');
   }
 
   signUp(email: string, password: string) {
@@ -83,6 +82,17 @@ export class SupabaseService {
   getSession() {
     return this.supabase.auth.getSession();
   }
+
+    // Login com Google
+  signInWithGoogle() {
+    return this.supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: environment.REDIRECT_URL+'dashboard' // para onde o usuário vai depois de logar
+      }
+    });
+  }
+
 
   onAuthChange(callback: (event: AuthChangeEvent, session: Session | null) => void) {
     this.supabase.auth.onAuthStateChange((_event, session) => {
@@ -112,6 +122,19 @@ export class SupabaseService {
 getMembros() {
   return this.supabase.from('membros').select('*').order('nome_completo', { ascending: true });
 }
+
+getMembrosComConfirmacao() {
+  return this.supabase
+    .from('membros')
+    .select(`
+      *,
+      confirmacao:confirmacoes_membros (
+        *
+      )
+    `)
+    .order('nome_completo', { ascending: true });
+}
+
 
 // Adicionar membro
 addMembro(membro: any) {
@@ -143,6 +166,10 @@ getConfirmacoesPorMembro(membro_id: string) {
     .select('*')
     .eq('membro_id', membro_id)
     .order('data_confirmacao', { ascending: true });
+}
+
+getConfirmacoes() {
+  return this.supabase.from('confirmacoes_membros').select('*');
 }
 
 }

@@ -22,20 +22,24 @@
         <td>{{ membro.email }}</td>
         <td>{{ membro.telefone }}</td>
         <td>{{ membro.funcao }}</td>
-        <td>
+        <td class="text-center">
         @if((confirmacoes[membro.id]?.length ?? 0) > 0) {
             <span class="badge bg-success">Sim</span>
         } @else {
             <span class="badge bg-secondary">Não</span>
         }
         </td>
-        <td>
+        <td class="d-flex gap-2">
             <button 
             class="btn btn-sm btn-primary" 
             (click)="confirmarMembro(membro)"
-            [disabled]="(confirmacoes[membro.id]?.length ?? 0) > 0">
-            Confirmar
+            [disabled]="(confirmacoes[membro.id]?.length ?? 0) > 0"
+            title="Confirmar Membro">
+            <mat-icon>done</mat-icon>
             </button>
+            <button class="btn btn-sm btn-danger"(click)="deletarMembro(membro)" title="Deletar Membro">
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
       </tr>
     </tbody>
