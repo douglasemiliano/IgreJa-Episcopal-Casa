@@ -35,6 +35,12 @@ export class SidebarComponent implements AfterViewInit, OnDestroy, OnInit {
         console.log('isMobile no sidebar:', data);
       }
     })
+
+    this.coreService.isDarkMode$.subscribe({
+      next: (data) => {
+        this.isDarkMode = (data === 'dark');
+        console.log('isDarkMode no sidebar:', data);
+      } })
   }
 
   ngOnInit(): void {

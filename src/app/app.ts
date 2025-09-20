@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Renderer2, signal, OnInit, HostListener } from '@angular/core';
+import { Component, Renderer2, signal, OnInit, HostListener, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,7 @@ import { SupabaseService } from './services/supabase.service';
 import { NavbarComponent } from './components/utils/navbar/navbar.component';
 import { LoadingComponent } from './components/utils/loading/loading.component';
 import { SidebarComponent } from './components/utils/sidebar/sidebar.component';
+import { CoreService } from './services/core.service';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,9 @@ export class App implements OnInit {
   isDarkMode = false;
   isLoggedIn: boolean;
   isExpanded = true;
+
+  private coreService = inject(CoreService);
+
 
   constructor(private router: Router, private renderer: Renderer2, private supabase: SupabaseService){
     this.checkScreenSize();
@@ -50,15 +54,18 @@ export class App implements OnInit {
   toggleDarkMode() {
     console.log('Trocando tema', );
     this.isDarkMode = !this.isDarkMode;
+    
     const themeClass = 'dark-mode';
     const body = document.body;
-
+    
     if (this.isDarkMode) {
       this.renderer.addClass(body, themeClass);
       localStorage.setItem('theme', 'dark');
+      this.coreService.toggleDarkMode('dark');
     } else {
       this.renderer.removeClass(body, themeClass);
       localStorage.setItem('theme', 'light');
+      this.coreService.toggleDarkMode('light');
     }
   }
 

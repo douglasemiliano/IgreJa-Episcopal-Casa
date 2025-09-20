@@ -24,18 +24,19 @@
     h1 {
       margin-top: 5rem;
     }
+
     input {
       width: 100% !important;
     }
   }
 }
 
-.card{
+.card {
   border-radius: 1rem;
   background-color: var(--card-background);
   border: none;
 
-  & mat-icon{
+  & mat-icon {
     color: var(--text-color)
   }
 }
@@ -43,54 +44,57 @@
 
 /* Estilos gerais */
 .input-field {
-    width: 30%;
-  }
-  
-  /* Estilos para o botão de cadastro */
-  .cadastro-btn {
-    background-color: var(--color-primary);
+  width: 30%;
+}
+
+/* Estilos para o botão de cadastro */
+.cadastro-btn {
+  background-color: var(--active-background);
+  color: var(--color-primary-contrast);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: var(--font-medium);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease;
+
+  & mat-icon {
+    font-size: 1.2rem;
     color: var(--color-primary-contrast);
-    border: none;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-weight: var(--font-medium);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: background-color 0.3s ease;
-    & mat-icon {
-      font-size: 1.2rem;
-      color: var(--color-primary-contrast);
-    }
+  }
+}
+
+.fab {
+  display: none;
+  ;
+}
+
+/* Estilos para telas pequenas (mobile) */
+@media (max-width: 767px) {
+
+  .input-field {
+    width: 100%;
   }
 
+  /* Ocultar o botão de cadastro em telas pequenas */
+  .cadastro-btn {
+    display: none;
+  }
+
+  /* Exibir o FAB em telas pequenas */
   .fab {
-   display: none;;
+    display: block;
+    position: fixed;
+    bottom: 3rem;
+    /* Distância do fundo da tela */
+    right: 1rem;
+    /* Distância da lateral direita da tela */
   }
-  
-  /* Estilos para telas pequenas (mobile) */
-  @media (max-width: 767px) {
 
-    .input-field {
-        width: 100%;
-      }
-    /* Ocultar o botão de cadastro em telas pequenas */
-    .cadastro-btn {
-      display: none;
-    }
-  
-    /* Exibir o FAB em telas pequenas */
-    .fab {
-        display: block;
-        position: fixed;
-        bottom: 3rem;  /* Distância do fundo da tela */
-        right: 1rem;   /* Distância da lateral direita da tela */
-      }
-  
-    /* Ajustar o campo de input para 100% da largura */
-    .input-field {
-      width: 100%;
-    }
+  /* Ajustar o campo de input para 100% da largura */
+  .input-field {
+    width: 100%;
   }
-  
-  
+}

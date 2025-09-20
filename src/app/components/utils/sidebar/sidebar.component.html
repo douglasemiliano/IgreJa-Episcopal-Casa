@@ -10,7 +10,7 @@
   </div>
 
   <a class="sidebar-brand" (click)="toggleSidebar()">
-    <img src="casa.png" alt="" width="65" height="60">
+    <img [src]="isDarkMode ? 'casa2.png' : 'casa.png'" alt="" width="65" height="60">
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">

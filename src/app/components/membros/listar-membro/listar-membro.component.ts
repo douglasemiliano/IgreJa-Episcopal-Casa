@@ -1,13 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { SupabaseService } from '../../../services/supabase.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-listar-membro',
-  imports: [CommonModule, FormsModule, RouterModule, MatIconModule],
+  imports: [CommonModule, FormsModule, RouterModule, MatIconModule, MatTableModule, MatSortModule, MatPaginatorModule,MatButtonModule],
   templateUrl: './listar-membro.component.html',
   styleUrl: './listar-membro.component.scss'
 })
@@ -15,6 +19,11 @@ export class ListarMembrosComponent implements OnInit {
   supabaseService = inject(SupabaseService);
   membros: any[] = [];
   confirmacoes: { [key: string]: any[] } = {};
+
+  displayedColumns: string[] = ['nome_completo', 'email', 'telefone', 'funcao', 'confirmacao', 'acoes'];
+  dataSource = new MatTableDataSource<any>([]);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit() {
     this.carregarMembros();
@@ -29,6 +38,9 @@ export class ListarMembrosComponent implements OnInit {
 
       console.log('Membros carregados:', this.membros);
 
+      this.dataSource = new MatTableDataSource(this.membros);
+      this.dataSource.data;
+
       // Inicializa confirmacoes com arrays vazios para cada membro
       for (let membro of this.membros) {
         const { data: confs, error: err } = await this.supabaseService.getConfirmacoesPorMembro(membro.id);
@@ -38,6 +50,15 @@ export class ListarMembrosComponent implements OnInit {
     } catch (err) {
       console.error(err);
       alert('Erro ao carregar membros.');
+    }
+  }
+
+    applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
     }
   }
 

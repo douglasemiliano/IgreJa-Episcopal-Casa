@@ -1,52 +1,103 @@
 <div class="container mt-4">
   <h2>Cadastrar Membro</h2>
-  <form #form="ngForm" (ngSubmit)="criarMembro(form)" class="mt-3">
 
-    <div class="mb-3">
-      <label class="form-label">Nome completo *</label>
-      <input type="text" class="form-control" name="nome_completo" [(ngModel)]="membro.nome_completo" required>
+  <!-- Step Indicator -->
+  <div class="step-indicator my-4">
+    <div class="step" [class.active]="currentStep >= 1">
+      <div class="step-icon">1</div>
+      <div class="step-label">Pessoais</div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step" [class.active]="currentStep >= 2">
+      <div class="step-icon">2</div>
+      <div class="step-label">Adicionais</div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step" [class.active]="currentStep >= 3">
+      <div class="step-icon">3</div>
+      <div class="step-label">Igreja</div>
+    </div>
+  </div>
+
+  <form [formGroup]="membroForm" (ngSubmit)="criarMembro()" class="mt-3">
+
+    <!-- Step 1: Informações Pessoais -->
+    <div *ngIf="currentStep === 1" formGroupName="pessoais">
+      <div class="mb-3">
+        <label class="form-label">Nome completo *</label>
+        <input type="text" class="form-control" formControlName="nome_completo">
+        <div *ngIf="pessoais.controls['nome_completo'].invalid && (pessoais.controls['nome_completo'].dirty || pessoais.controls['nome_completo'].touched)" class="text-danger mt-1">
+          <small *ngIf="pessoais.controls['nome_completo'].errors?.['required']">
+            Nome completo é obrigatório.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" formControlName="email">
+         <div *ngIf="pessoais.controls['email'].invalid && (pessoais.controls['email'].dirty || pessoais.controls['email'].touched)" class="text-danger mt-1">
+          <small *ngIf="pessoais.controls['email'].errors?.['email']">
+            Por favor, insira um email válido.
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Telefone</label>
+        <input type="text" class="form-control" formControlName="telefone">
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Email</label>
-      <input type="email" class="form-control" name="email" [(ngModel)]="membro.email">
+    <!-- Step 2: Dados Adicionais -->
+    <div *ngIf="currentStep === 2" formGroupName="adicionais">
+      <div class="mb-3">
+        <label class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-control" formControlName="data_nascimento">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Sexo</label>
+        <select class="form-select" formControlName="sexo">
+          <option value="">Selecione</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Feminino">Feminino</option>
+          <option value="Outro">Outro</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Endereço</label>
+        <input type="text" class="form-control" formControlName="endereco">
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Telefone</label>
-      <input type="text" class="form-control" name="telefone" [(ngModel)]="membro.telefone">
+    <!-- Step 3: Informações da Igreja -->
+    <div *ngIf="currentStep === 3" formGroupName="igreja">
+      <div class="mb-3">
+        <label class="form-label">Função</label>
+        <input type="text" class="form-control" formControlName="funcao">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Data de Entrada</label>
+        <input type="date" class="form-control" formControlName="data_entrada">
+      </div>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Data de Nascimento</label>
-      <input type="date" class="form-control" name="data_nascimento" [(ngModel)]="membro.data_nascimento">
-    </div>
+    <!-- Navigation Buttons -->
+    <div class="d-flex justify-content-between mt-4">
+      <button type="button" class="btn btn-secondary" (click)="prevStep()" [disabled]="currentStep === 1">
+        Anterior
+      </button>
 
-    <div class="mb-3">
-      <label class="form-label">Sexo</label>
-      <select class="form-select" name="sexo" [(ngModel)]="membro.sexo">
-        <option value="">Selecione</option>
-        <option value="Masculino">Masculino</option>
-        <option value="Feminino">Feminino</option>
-        <option value="Outro">Outro</option>
-      </select>
-    </div>
+      <button type="button" class="btn btn-primary" (click)="nextStep()" *ngIf="currentStep < 3">
+        Próximo
+      </button>
 
-    <div class="mb-3">
-      <label class="form-label">Endereço</label>
-      <input type="text" class="form-control" name="endereco" [(ngModel)]="membro.endereco">
+      <button type="submit" class="btn btn-success" *ngIf="currentStep === 3" [disabled]="!membroForm.valid">
+        Cadastrar Membro
+      </button>
     </div>
-
-    <div class="mb-3">
-      <label class="form-label">Função</label>
-      <input type="text" class="form-control" name="funcao" [(ngModel)]="membro.funcao">
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Data de Entrada</label>
-      <input type="date" class="form-control" name="data_entrada" [(ngModel)]="membro.data_entrada">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Cadastrar Membro</button>
   </form>
 </div>
