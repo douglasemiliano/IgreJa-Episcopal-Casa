@@ -1,13 +1,29 @@
-<mat-toolbar color="primary" class="navbar">
+<mat-toolbar class="navbar">
 
-  <button (click)="onSidenavToggle()" class="menu-button">
+  <button mat-icon-button (click)="onSidenavToggle()">
     <mat-icon>menu</mat-icon>
   </button>
 
-    <span class="spacer"></span>
+  <span class="spacer"></span>
 
-    <button (click)="logout()">
-      <mat-icon>logout</mat-icon>
+  <!-- Menu do usuário -->
+  <button mat-icon-button [matMenuTriggerFor]="userMenu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item (click)="goToPerfil()">
+      <mat-icon>person</mat-icon>
+      <span>Perfil</span>
     </button>
-  </mat-toolbar>
-  
+    <button mat-menu-item (click)="onToggle()">
+      <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      <span>Modo {{ isDarkMode ? 'Claro' : 'Escuro' }}</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Sair</span>
+    </button>
+  </mat-menu>
+
+</mat-toolbar>
