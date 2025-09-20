@@ -39,7 +39,7 @@ export class LoginComponent {
       if (error) {
         this.snackBar.open('Erro ao fazer login', 'Fechar', { duration: 3000 });
       } else {
-        this.router.navigateByUrl("/lecionario/listar")
+        this.router.navigateByUrl("/dashboard")
         this.snackBar.open('Login realizado com sucesso', 'Fechar', { duration: 3000 });
       }
     }
