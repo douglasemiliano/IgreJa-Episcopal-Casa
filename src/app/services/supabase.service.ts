@@ -107,4 +107,42 @@ export class SupabaseService {
       .delete()
       .eq('id', id);
   }
+
+  // Listar todos os membros
+getMembros() {
+  return this.supabase.from('membros').select('*').order('nome_completo', { ascending: true });
+}
+
+// Adicionar membro
+addMembro(membro: any) {
+  return this.supabase.from('membros').insert([membro]);
+}
+
+// Atualizar membro
+updateMembro(id: string, membro: any) {
+  return this.supabase.from('membros').update(membro).eq('id', id);
+}
+
+// Deletar membro
+deleteMembro(id: string) {
+  return this.supabase.from('membros').delete().eq('id', id);
+}
+
+// --- CONFIRMAÇÕES ---
+
+// Registrar confirmação
+confirmarMembro(membro_id: string, dadosConfirmacao: any) {
+  const confirmacao = { membro_id, ...dadosConfirmacao };
+  return this.supabase.from('confirmacoes_membros').insert([confirmacao]);
+}
+
+// Listar confirmações de um membro
+getConfirmacoesPorMembro(membro_id: string) {
+  return this.supabase
+    .from('confirmacoes_membros')
+    .select('*')
+    .eq('membro_id', membro_id)
+    .order('data_confirmacao', { ascending: true });
+}
+
 }

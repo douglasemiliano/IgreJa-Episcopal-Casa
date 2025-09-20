@@ -10,5 +10,7 @@ export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: "login", loadComponent: () => import('./components/auth/login/login.component').then(c => c.LoginComponent) },
     { path: 'lecionario/cadastro', loadComponent: () => import('./components/lecionario/cadastro-lecionario/cadastro-lecionario.component').then(c => c.CadastroLecionarioComponent), canActivate: [AuthGuard] },
-    { path: 'certificado/confirmacao', loadComponent: () => import('./components/certificado/certificado-confirmacao/certificado-confirmacao.component').then(c => c.CertificadoConfirmacaoComponent) }
+    { path: 'certificado/confirmacao', loadComponent: () => import('./components/certificado/certificado-confirmacao/certificado-confirmacao.component').then(c => c.CertificadoConfirmacaoComponent) },
+    { path: 'membros/cadastrar', loadComponent: () => import('./components/membros/cadastrar-membro/cadastrar-membro.component').then(c => c.CadastrarMembroComponent), canActivate: [AuthGuard] },
+    { path: 'membros', loadComponent: () => import('./components/membros/listar-membro/listar-membro.component').then(c => c.ListarMembrosComponent), canActivate: [AuthGuard] },
 ];
