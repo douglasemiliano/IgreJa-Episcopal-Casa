@@ -146,11 +146,11 @@ export class CertificadoBatismoService {
 
     // Assinaturas
     const signaturesY = bottomBlockY + 15;
-    doc.line(50, signaturesY, 120, signaturesY);
-    doc.line(180, signaturesY, 250, signaturesY);
+    const signatureLineWidth = 70;
+    const signatureLineXStart = (this.larguraPagina - signatureLineWidth) / 2;
+    doc.line(signatureLineXStart, signaturesY, signatureLineXStart + signatureLineWidth, signaturesY);
     doc.setFontSize(12);
-    doc.text('Pastor Celebrante', 85, signaturesY + 5, { align: 'center' });
-    doc.text('Bispo Diocesano', 215, signaturesY + 5, { align: 'center' });
+    doc.text('Pastor Celebrante', this.larguraPagina / 2, signaturesY + 5, { align: 'center' });
 
     return doc.output('blob');
   }
