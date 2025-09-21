@@ -46,7 +46,7 @@ export class CertificadoBatismoService {
     if(dados.tipoPessoa === "adulto"){
       doc.addImage("fundo2.jpg", 'JPEG', 0, 0, this.larguraPagina, this.alturaPagina);
     } else {
-      doc.addImage("batismo4.png", 'PNG', 0, 0, this.larguraPagina, this.alturaPagina);
+      doc.addImage("batismo.png", 'PNG', 0, 0, this.larguraPagina, this.alturaPagina);
     }
 
     doc.addImage("casa.png", 'PNG', this.margin, this.margin, this.logoWidth, this.logoHeight);
@@ -149,7 +149,7 @@ export class CertificadoBatismoService {
     doc.line(50, signaturesY, 120, signaturesY);
     doc.line(180, signaturesY, 250, signaturesY);
     doc.setFontSize(12);
-    doc.text('Pároco', 85, signaturesY + 5, { align: 'center' });
+    doc.text('Pastor Celebrante', 85, signaturesY + 5, { align: 'center' });
     doc.text('Bispo Diocesano', 215, signaturesY + 5, { align: 'center' });
 
     return doc.output('blob');
