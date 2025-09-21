@@ -212,7 +212,7 @@ export class CertificadoConfirmacaoService {
     // Data e Local
     doc.setFontSize(14);
     const localData = 'Jaboatão dos Guararapes, ' + this.formatarData(dados.dataConfirmacao);
-    doc.text(localData, this.larguraPagina / 2, this.alturaPagina - 50, { align: 'center' });
+    doc.text(localData, this.larguraPagina / 2, this.alturaPagina - 55, { align: 'center' });
 
     // Assinaturas
     doc.line(50, this.alturaPagina - 35, 120, this.alturaPagina - 35);

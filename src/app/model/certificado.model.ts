@@ -15,4 +15,7 @@ export interface DadosCertificado {
   igrejaBatismo?: string;
   livroRegistro?: string;
   paginaRegistro?: string;
+  nomePai?:string;
+  nomeMae?:string;
+  tipoPessoa?:string;
 }
