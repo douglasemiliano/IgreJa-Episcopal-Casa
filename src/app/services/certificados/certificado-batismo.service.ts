@@ -97,7 +97,7 @@ export class CertificadoBatismoService {
         { text: dados.nomePai ? ' e ' : '', bold: false, size: 16 },
         { text: dados.nomeMae || '', bold: false, size: 16},
         { text: ', foi batizado(a) no dia ' + this.formatarData(dados.dataBatismo!) +
-               ', na Igreja ' + dados.igrejaBatismo + ', Diocese ' + dados.diocese + ', ', bold: false, size: 16 },
+               ', na Igreja Episcopal Casa,' + ', Diocese Igreja Episcopal Unida do Brasil' + ', ', bold: false, size: 16 },
         { text: 'em nome do Pai, do Filho e do Espírito Santo', bold: true, size: 16 },
         { text: ', conforme mandamento do ', bold: false, size: 16 },
         { text: 'Senhor Jesus Cristo.', bold: true, size: 16 },

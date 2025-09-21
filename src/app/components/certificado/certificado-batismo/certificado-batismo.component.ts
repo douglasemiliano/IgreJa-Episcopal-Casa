@@ -37,17 +37,14 @@ export class CertificadoBatismoComponent {
       tipoPessoa: ['', Validators.required],
       nomeCompleto: ['', Validators.required],
       dataBatismo: ['', Validators.required],
-      igrejaBatismo: ['Igreja Episcopal Casa', Validators.required],
-      paroco: ['', Validators.required],
       padrinhos: [],
       dataNascimento: [''],
       nomeMae:['',],
       nomePai:['',],
-      naturalidade: [''],
       numeroRegistro: [''],
+      livroRegistro: [''],
+      paginaRegistro: [''],
       localCelebracao: ['Rua Arão Lins de Andrade, 106, Jaboatão dos Guararapes 54310-335, PE'],
-      diocese: ['Episcopal Unida do Brasil'],
-      bispo: ['Hermany Soares', Validators.required]
     });
     this.formulario.get('localCelebracao')?.disable();
     this.formulario.get('igrejaBatismo')?.disable();
