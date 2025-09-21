@@ -51,7 +51,7 @@ export class CertificadoConfirmacaoService {
     doc.setFontSize(14);
     doc.setFont('times', 'Italic');
     const textoTrindade = [
-      'Em nome do Pai, e do Filho, e do Espírito Santo',
+      'Em nome do Pai, e do Filho, e do Espírito Santo.',
        'Amém.'
     ];
     const espacamentoLinhas = 6; // espaçamento entre as linhas em mm
