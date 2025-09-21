@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CertificadoBatismoService } from '../../../services/certificados/certificado-batismo.service';
 import { DadosCertificado } from '../../../model/certificado.model';
 import { PdfViewerModalComponent } from '../certificado-confirmacao/pdf-viewer-modal/pdf-viewer-modal.component';
 import { CommonModule } from '@angular/common';
+import { CoreService } from '../../../services/core.service';
 
 @Component({
   selector: 'app-certificado-batismo',
@@ -20,8 +21,12 @@ export class CertificadoBatismoComponent {
     'Elton Nascimento',
     'Marcos Santos',
     'Bispo Hermany Soares',
-    'Reverendo Ielvys'
+    'Ielvys'
   ];
+
+  private coreService: CoreService = inject(CoreService)
+  isMobile: boolean = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -30,21 +35,28 @@ export class CertificadoBatismoComponent {
   ) {
     this.formulario = this.fb.group({
       tipoPessoa: ['', Validators.required],
-      nomeCompleto: ['Giovanna Nicole Daniela da Rosa', Validators.required],
-      dataBatismo: ['11/08/2003', Validators.required],
+      nomeCompleto: ['', Validators.required],
+      dataBatismo: ['', Validators.required],
       igrejaBatismo: ['Igreja Episcopal Casa', Validators.required],
-      paroco: ['Elton Nascimento', Validators.required],
-      padrinhos: ['Maria Eduarda Neves, Arthur Fonseca Neves'],
+      paroco: ['', Validators.required],
+      padrinhos: [],
       dataNascimento: [''],
-      nomePais: [''],
-      nomeMae:['Ana Tatiane da Rosa',],
-      nomePai:['Roberto Augusto da Rosa',],
+      nomeMae:['',],
+      nomePai:['',],
       naturalidade: [''],
       numeroRegistro: [''],
       localCelebracao: ['Rua Arão Lins de Andrade, 106, Jaboatão dos Guararapes 54310-335, PE'],
       diocese: ['Episcopal Unida do Brasil'],
       bispo: ['Hermany Soares', Validators.required]
     });
+    this.formulario.get('localCelebracao')?.disable();
+    this.formulario.get('igrejaBatismo')?.disable();
+
+    this.coreService.isMobile$.subscribe({
+      next: (data) => {
+        this.isMobile = data;        
+      }
+    })
   }
 
   nextStep() {
@@ -75,11 +87,19 @@ export class CertificadoBatismoComponent {
       try {
         const pdfBlob = await this.certificadoService.gerarCertificado(dados);
         const fileName = this.certificadoService.getNomeArquivo(dados.nomeCompleto);
-        
-        this.dialog.open(PdfViewerModalComponent, {
-          width: '80vw',
-          data: { pdfBlob, fileName }
-        });
+
+        if (this.isMobile) {
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(pdfBlob);
+          link.download = fileName;
+          link.click();
+          URL.revokeObjectURL(link.href);
+        } else {
+          this.dialog.open(PdfViewerModalComponent, {
+            width: '80vw',
+            data: { pdfBlob, fileName }
+          });
+        }
       } catch (error) {
         console.error('Erro ao gerar certificado:', error);
         alert('Erro ao gerar o certificado. Por favor, tente novamente.');

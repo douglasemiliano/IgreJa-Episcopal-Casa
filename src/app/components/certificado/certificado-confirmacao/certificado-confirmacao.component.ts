@@ -21,12 +21,12 @@ formulario: FormGroup;
     private dialog: MatDialog
   ) {
     this.formulario = this.fb.group({
-      nomeCompleto: ['Douglas', Validators.required],
-      dataConfirmacao: ['11/08/1999', Validators.required],
-      igreja: ['Casa', Validators.required],
-      diocese: ['Unida', Validators.required],
+      nomeCompleto: ['', Validators.required],
+      dataConfirmacao: ['', Validators.required],
+      igreja: ['Episcopal Casa', Validators.required],
+      diocese: ['Igreja Episcopal Unida do Brasil', Validators.required],
       paroco: [''],
-      bispo: ['Hermany', Validators.required],
+      bispo: ['Hermany Soares', Validators.required],
       numeroRegistro: [''],
       padrinhos: [''],
       localCelebracao: ['Rua Arão Lins de Andrade, 106, Jaboatão dos Guararapes 54310-335, PE'],
@@ -37,7 +37,9 @@ formulario: FormGroup;
       igrejaBatismo: ['']
     });
 
-    this.formulario.get('localCelebracao')?.disable();
+    // this.formulario.get('localCelebracao')?.disable();
+    // this.formulario.get('diocese')?.disable();
+    // this.formulario.get('igreja')?.disable();
   }
 
   async onSubmit() {
@@ -52,7 +54,7 @@ formulario: FormGroup;
         padrinhos: this.formulario.value.padrinhos ? 
                   this.formulario.value.padrinhos.split(',').map((s: string) => s.trim()) : []
       };
-      
+      console.log(dados)
       try {
         const pdfBlob = await this.certificadoService.gerarCertificado(dados);
         const fileName = this.certificadoService.getNomeArquivo(dados.nomeCompleto);
