@@ -1,0 +1,202 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Registro de Batismo</h2>
+
+  <!-- Step Indicator -->
+  <div class="step-indicator my-4">
+    <div class="step" [class.active]="currentStep >= 1">
+      <div class="step-icon">1</div>
+      <div class="step-label">Dados do Batizando</div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step" [class.active]="currentStep >= 2">
+      <div class="step-icon">2</div>
+      <div class="step-label">Padrinhos e Celebração</div>
+    </div>
+    <div class="step-connector"></div>
+    <div class="step" [class.active]="currentStep >= 3">
+      <div class="step-icon">3</div>
+      <div class="step-label">Endereço</div>
+    </div>
+  </div>
+
+  <form [formGroup]="batismoForm" (ngSubmit)="adicionar()" class="mt-3">
+
+    <!-- Step 1: Dados do Batizando -->
+    <div *ngIf="currentStep === 1">
+      <div class="row g-3">
+        <div class="col-8">
+          <label for="nome_irmao" class="form-label">Nome*</label>
+          <input type="text" class="form-control" id="nome_irmao" formControlName="nome_irmao" placeholder="Nome completo do batizando">
+          <div *ngIf="batismoForm.get('nome_irmao')?.invalid && (batismoForm.get('nome_irmao')?.dirty || batismoForm.get('nome_irmao')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('nome_irmao')?.errors?.['required']">
+              Nome do batizando é obrigatório.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="data_nascimento" class="form-label">Data de nascimento*</label>
+          <input type="date" class="form-control" id="data_nascimento" formControlName="data_nascimento">
+          <div *ngIf="batismoForm.get('data_nascimento')?.invalid && (batismoForm.get('data_nascimento')?.dirty || batismoForm.get('data_nascimento')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('data_nascimento')?.errors?.['required']">
+              Data de nascimento é obrigatória.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="pai" class="form-label">Pai*</label>
+          <input type="text" class="form-control" id="pai" formControlName="pai" placeholder="Nome do pai">
+          <div *ngIf="batismoForm.get('pai')?.invalid && (batismoForm.get('pai')?.dirty || batismoForm.get('pai')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('pai')?.errors?.['required']">
+              Nome do pai é obrigatório.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="mae" class="form-label">Mãe*</label>
+          <input type="text" class="form-control" id="mae" formControlName="mae" placeholder="Nome da mãe">
+          <div *ngIf="batismoForm.get('mae')?.invalid && (batismoForm.get('mae')?.dirty || batismoForm.get('mae')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('mae')?.errors?.['required']">
+              Nome da mãe é obrigatório.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Padrinhos e Celebração -->
+    <div *ngIf="currentStep === 2">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="padrinho" class="form-label">Padrinho*</label>
+          <input type="text" class="form-control" id="padrinho" formControlName="padrinho" placeholder="Nome do padrinho">
+          <div *ngIf="batismoForm.get('padrinho')?.invalid && (batismoForm.get('padrinho')?.dirty || batismoForm.get('padrinho')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('padrinho')?.errors?.['required']">
+              Nome do padrinho é obrigatório.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="madrinha" class="form-label">Madrinha*</label>
+          <input type="text" class="form-control" id="madrinha" formControlName="madrinha" placeholder="Nome da madrinha">
+          <div *ngIf="batismoForm.get('madrinha')?.invalid && (batismoForm.get('madrinha')?.dirty || batismoForm.get('madrinha')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('madrinha')?.errors?.['required']">
+              Nome da madrinha é obrigatório.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="data_batismo" class="form-label">Data do Batismo*</label>
+          <input type="date" class="form-control" id="data_batismo" formControlName="data_batismo">
+          <div *ngIf="batismoForm.get('data_batismo')?.invalid && (batismoForm.get('data_batismo')?.dirty || batismoForm.get('data_batismo')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('data_batismo')?.errors?.['required']">
+              Data do batismo é obrigatória.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="pastor" class="form-label">Pastor*</label>
+          <input type="text" class="form-control" id="pastor" formControlName="pastor" placeholder="Nome do pastor celebrante">
+          <div *ngIf="batismoForm.get('pastor')?.invalid && (batismoForm.get('pastor')?.dirty || batismoForm.get('pastor')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('pastor')?.errors?.['required']">
+              Nome do pastor é obrigatório.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="secretario" class="form-label">Secretário*</label>
+          <input type="text" class="form-control" id="secretario" formControlName="secretario" placeholder="Nome do secretário">
+          <div *ngIf="batismoForm.get('secretario')?.invalid && (batismoForm.get('secretario')?.dirty || batismoForm.get('secretario')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('secretario')?.errors?.['required']">
+              Nome do secretário é obrigatório.
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Endereço -->
+    <div *ngIf="currentStep === 3">
+      <div class="row g-3">
+          <div class="col-md-4">
+          <label for="cep" class="form-label">CEP*</label>
+          <input type="text" class="form-control" id="cep" formControlName="cep" (keyup)="consultarCep($event.target)">
+          <div *ngIf="batismoForm.get('cep')?.invalid && (batismoForm.get('cep')?.dirty || batismoForm.get('cep')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('cep')?.errors?.['required']">
+              CEP é obrigatório.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <label for="rua" class="form-label">Rua*</label>
+          <input type="text" class="form-control" id="rua" formControlName="rua">
+          <div *ngIf="batismoForm.get('rua')?.invalid && (batismoForm.get('rua')?.dirty || batismoForm.get('rua')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('rua')?.errors?.['required']">
+              Rua é obrigatória.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="numero_endereco" class="form-label">Número*</label>
+          <input type="text" class="form-control" id="numero_endereco" formControlName="numero_endereco">
+          <div *ngIf="batismoForm.get('numero_endereco')?.invalid && (batismoForm.get('numero_endereco')?.dirty || batismoForm.get('numero_endereco')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('numero_endereco')?.errors?.['required']">
+              Número é obrigatório.
+            </small>
+          </div>
+        </div>
+        <div class="col-8">
+          <label for="complemento" class="form-label">Complemento*</label>
+          <input type="text" class="form-control" id="complemento" formControlName="complemento">
+          <div *ngIf="batismoForm.get('complemento')?.invalid && (batismoForm.get('complemento')?.dirty || batismoForm.get('complemento')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('complemento')?.errors?.['required']">
+              Complemento é obrigatório.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="bairro" class="form-label">Bairro*</label>
+          <input type="text" class="form-control" id="bairro" formControlName="bairro">
+          <div *ngIf="batismoForm.get('bairro')?.invalid && (batismoForm.get('bairro')?.dirty || batismoForm.get('bairro')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('bairro')?.errors?.['required']">
+              Bairro é obrigatório.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="cidade" class="form-label">Cidade*</label>
+          <input type="text" class="form-control" id="cidade" formControlName="cidade">
+          <div *ngIf="batismoForm.get('cidade')?.invalid && (batismoForm.get('cidade')?.dirty || batismoForm.get('cidade')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('cidade')?.errors?.['required']">
+              Cidade é obrigatória.
+            </small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="estado" class="form-label">Estado*</label>
+          <input type="text" class="form-control" id="estado" formControlName="estado">
+          <div *ngIf="batismoForm.get('estado')?.invalid && (batismoForm.get('estado')?.dirty || batismoForm.get('estado')?.touched)" class="text-danger mt-1">
+            <small *ngIf="batismoForm.get('estado')?.errors?.['required']">
+              Estado é obrigatório.
+            </small>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="d-flex justify-content-between mt-4">
+      <button type="button" class="btn btn-secondary" (click)="prevStep()" [disabled]="currentStep === 1">
+        Anterior
+      </button>
+
+      <button type="button" class="btn btn-primary" (click)="nextStep()" *ngIf="currentStep < 3" [disabled]="(currentStep === 1 && step1Invalid) || (currentStep === 2 && step2Invalid)">
+        Próximo
+      </button>
+
+      <button type="submit" class="btn btn-success" *ngIf="currentStep === 3" [disabled]="batismoForm.invalid">
+        Adicionar Registro
+      </button>
+    </div>
+  </form>
+</div>

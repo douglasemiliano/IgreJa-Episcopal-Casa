@@ -7,7 +7,7 @@ import { LoadingService } from './loading.service'; // Importando seu serviço d
   providedIn: 'root'
 })
 export class SupabaseService {
-  private supabase: SupabaseClient;
+  public supabase: SupabaseClient;
 
   private loadingService: LoadingService = inject(LoadingService);
 

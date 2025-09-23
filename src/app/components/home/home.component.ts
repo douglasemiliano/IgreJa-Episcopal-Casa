@@ -1,4 +1,3 @@
-import { CdkDrag } from "@angular/cdk/drag-drop";
 import { OverlayModule } from "@angular/cdk/overlay";
 import { CommonModule, DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
@@ -12,14 +11,13 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { Router } from "@angular/router";
 import { LecionarioService } from "../../services/lecionario.service";
-import { DashboardComponent } from "../dashboard/dashboard.component";
 
 @Component({
   selector: 'app-home',
   imports: [FormsModule,
     CommonModule, MatButtonModule,
     MatIconModule, MatRippleModule, MatCardModule, ReactiveFormsModule, MatDatepickerModule, MatFormFieldModule,
-    MatInputModule, OverlayModule, DashboardComponent],
+    MatInputModule, OverlayModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

@@ -16,4 +16,7 @@ export const routes: Routes = [
     { path: 'membros/cadastrar', loadComponent: () => import('./components/membros/cadastrar-membro/cadastrar-membro.component').then(c => c.CadastrarMembroComponent), canActivate: [AuthGuard] },
     { path: 'membros', loadComponent: () => import('./components/membros/listar-membro/listar-membro.component').then(c => c.ListarMembrosComponent), canActivate: [AuthGuard] },
     { path: 'dashboard', loadComponent: () => import('./components/dashboard/dashboard.component').then(c => c.DashboardComponent), canActivate: [AuthGuard] },
+    { path: 'livro', loadComponent: () => import('./components/livro-registro/livro-registro.component').then(c => c.LivroRegistroComponent), canActivate: [AuthGuard]},
+    { path: 'livro/batismo', loadComponent: () => import('./components/livro-registro/lista-batismo/lista-batismo.component').then(c => c.ListaBatismoComponent)},
+    { path: 'livro/batismo/cadastro', loadComponent: () => import('./components/livro-registro/registro-batismo/registro-batismo.component').then(c => c.RegistroBatismoComponent), canActivate: [AuthGuard]}
 ];
